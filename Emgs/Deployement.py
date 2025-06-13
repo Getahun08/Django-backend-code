@@ -20,6 +20,7 @@ MIDDLEWARE = [
     'django_auto_logout.middleware.auto_logout'
 ]
 # CORS_ALLOWED_ORIGINS = [ 'http://localhost:5173']
+
 STORAGES={'default': 
           {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
           
@@ -31,11 +32,10 @@ STORAGES={'default':
 DATABASES = {
    'default': {
        'ENGINE': dj_database_url.config(
-           default=os.environ['DATABASE-URL'],
+           default=os.environ['DATABASE_URL'],
            conn_max_age=600
 
        )
        
    }
 } 
-STATIC_ROOT=BASE_DIR/'staticfiles'
