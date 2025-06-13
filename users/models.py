@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import Permission,Group
-
+import os
 from django.db import models
 from django_countries.fields import CountryField
 from django.core.validators import MinLengthValidator
