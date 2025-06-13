@@ -49,7 +49,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_auto_logout.middleware.auto_logout'
 ]
-CORS_ALLOWED_ORIGINS = [ 'http://localhost:5173']
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://employe-management-sysytem.onrender.com",
+    "https://django-backend-code.onrender.com"
+]
 AUTH_USER_MODEL = 'users.CustomUser'
 AUTHENTICATION_BACKENDS=[
     #'users.auth_backend.EmailAuthBackend'
@@ -152,12 +156,7 @@ import os
 MEDIA_URL = '/media/'  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  
 
-CORS_ALLOW_CREDENTIALS = False  
-CORS_ALLOW_HEADERS = [
-    'content-type',
-    'authorization',
-]
-
+CORS_ALLOW_CREDENTIALS = True  
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
@@ -165,4 +164,9 @@ CORS_ALLOW_METHODS = [
     'PATCH',
     'DELETE',
     'OPTIONS',
+]
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'x-requested-with',
 ]
