@@ -154,30 +154,38 @@ class EmployeSkill(models.Model):
 
 
 
+
+
 @receiver(reset_password_token_created)
-def password_reset_token_created( reset_password_token,*args, **kwargs):
-    sitelink="http://localhost:5173/"
-    token="{}".format(reset_password_token.key)
-    full_link=str(sitelink)+str('password-reset/')+str(token)
+def password_reset_token_created(reset_password_token, *args, **kwargs):
+    # Determine the frontend URL dynamically
+    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:5173/')
+    backend_url = os.environ.get('BACKEND_URL', 'https://django-backend-code.onrender.com/api/password_reset/confirm/')
 
-    print(token)
-    print(full_link)
-    context={
+    token = reset_password_token.key
+    full_link = f"{frontend_url}password-reset/{token}"
 
-        'full_link':full_link,
-        'email_address':reset_password_token.user.email
+    print("Generated Token:", token)
+    print("Password Reset Link:", full_link)
 
+    context = {
+        'full_link': full_link,
+        'backend_url': backend_url,
+        'email_address': reset_password_token.user.email
     }
-    html_message=render_to_string('backend/email.html',context=context)
-    plain_message=strip_tags(html_message)
-    msg=EmailMultiAlternatives(
-        subject=" You Are Requesting for reset password or Creating Password for {title}".format(title=reset_password_token.user.email),
+
+    html_message = render_to_string('backend/email.html', context=context)
+    plain_message = strip_tags(html_message)
+
+    msg = EmailMultiAlternatives(
+        subject=f"You Are Requesting for a Password Reset for {reset_password_token.user.email}",
         body=plain_message,
         from_email='getahuntamirat08@gmail.com',
         to=[reset_password_token.user.email]
     )
-    msg.attach_alternative(html_message,"text/html")
+    msg.attach_alternative(html_message, "text/html")
     msg.send()
+
     
 
    
