@@ -1,6 +1,7 @@
 import os
 from.settings import *
 import dj_database_url
+from settings import BASE_DIR
 
 ALLOWED_HOSTS=[os.environ('WEPSITE_HOSTNAME')]
 CSRF_TRESTED_ORGINS=['https://'+os.environ('WEPSITE_HOSTNAME')]
