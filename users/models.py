@@ -154,12 +154,14 @@ class EmployeSkill(models.Model):
 
 
 
+from dotenv import load_dotenv
 
+load_dotenv() 
 
 @receiver(reset_password_token_created)
 def password_reset_token_created(reset_password_token, *args, **kwargs):
     # Determine the frontend URL dynamically
-    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:5173/')
+    frontend_url = os.environ.get('FRONTEND_URL', 'https://employe-management-sysytem.onrender.com/')
     backend_url = os.environ.get('BACKEND_URL', 'https://django-backend-code.onrender.com/api/password_reset/confirm/')
 
     token = reset_password_token.key
