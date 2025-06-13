@@ -19,7 +19,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_auto_logout.middleware.auto_logout'
 ]
-# CORS_ALLOWED_ORIGINS = [ 'http://localhost:5173']
+CORS_ALLOWED_ORIGINS = [ 'https://employe-management-sysytem.onrender.com']
 
 STORAGES={'default': 
           {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
